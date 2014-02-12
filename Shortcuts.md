@@ -20,3 +20,6 @@ Chrome
 
 Firefox
 =
+
+Visual Studio 2012
+=
