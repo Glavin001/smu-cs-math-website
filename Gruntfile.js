@@ -348,6 +348,27 @@ module.exports = function (grunt) {
                 'imagemin',
                 'svgmin'
             ]
+        },
+        
+
+        // compile less 
+        less: {
+            develop: {
+                options: {
+                }, 
+                files: {
+                    'app/css/compiled_less.css': 'less/include.less'
+                }
+            },
+            release: {
+                options: {
+                    compress: true,
+                    cleancss: true
+                },
+                files: {
+                    'app/css/compiled_less.css': 'less/include.less'
+                }
+            }
         }
     });
 
