@@ -357,7 +357,7 @@ module.exports = function (grunt) {
                 options: {
                 }, 
                 files: {
-                    'app/css/compiled_less.css': 'less/include.less'
+                    'app/css/compiled.less.css': 'less/include.less'
                 }
             },
             release: {
@@ -366,7 +366,7 @@ module.exports = function (grunt) {
                     cleancss: true
                 },
                 files: {
-                    'app/css/compiled_less.css': 'less/include.less'
+                    'app/css/compiled.less.css': 'less/include.less'
                 }
             }
         }
