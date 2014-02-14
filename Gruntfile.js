@@ -357,7 +357,7 @@ module.exports = function (grunt) {
                 options: {
                 }, 
                 files: {
-                    'app/css/compiled.less.css': 'less/include.less'
+                    'app/css/compiled.less.css': 'metalang/less/include.less'
                 }
             },
             release: {
@@ -366,7 +366,27 @@ module.exports = function (grunt) {
                     cleancss: true
                 },
                 files: {
-                    'app/css/compiled.less.css': 'less/include.less'
+                    'app/css/compiled.less.css': 'metalang/less/include.less'
+                }
+            }
+        },
+
+        // compile jade
+        jade: {
+            develop: {
+                options: {
+                    pretty: true
+                },
+                files: {
+                    "app/jade-tutorial.html": "metalang/jade/jade-tutorial.jade"
+                }
+            },
+
+            release: {
+                options: {
+                },
+                files: {
+                    "app/jade-tutorial.html": "metalang/jade/jade-tutorial.jade"
                 }
             }
         }
