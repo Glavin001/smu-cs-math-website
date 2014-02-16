@@ -2,6 +2,7 @@
   "name": "smu-cs-math-website",
   "version": "0.1.0",
   "description": "Saint Mary's University, Computer Science and Mathematics Society Website.",
+  "homepage": "https://github.com/SMU-CS-and-Math-Society/smu-cs-math-website",
   "contributors": [
     {
         "name": "Dawson Reid",
@@ -13,6 +14,10 @@
         "url": "https://github.com/Glavin001"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SMU-CS-and-Math-Society/smu-cs-math-website.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -48,5 +53,6 @@
   "scripts": {
     "test": "grunt default",
     "start": "grunt serve"
-  }
+  },
+  "license": "MIT"
 }
