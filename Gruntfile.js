@@ -355,7 +355,7 @@ module.exports = function (grunt) {
         less: {
             develop: {
                 options: {
-                }, 
+                },
                 files: {
                     'app/css/compiled.less.css': 'metalang/less/include.less'
                 }
