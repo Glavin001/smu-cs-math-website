@@ -41,6 +41,21 @@ module.exports = function (grunt) {
                     livereload: true
                 }
             },
+            less: {
+                files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+                tasks: ['less:compile'],
+                options: {
+                    livereload: true
+                }
+            },
+            coffee: {
+                files: ['<%= yeoman.app %>/scripts/{,*/}*.{coffee,litcoffee,coffee.md}'],
+                tasks: ['coffee:dist']
+            },
+            coffeeTest: {
+                files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
+                tasks: ['coffee:test', 'test:watch']
+            },
             jstest: {
                 files: ['test/spec/{,*/}*.js'],
                 tasks: ['test:watch']
@@ -63,6 +78,7 @@ module.exports = function (grunt) {
                 files: [
                     '<%= yeoman.app %>/{,*/}*.html',
                     '.tmp/styles/{,*/}*.css',
+                    '.tmp/scripts/{,*/}*.js',
                     '<%= yeoman.app %>/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
                 ]
             }
@@ -144,8 +160,27 @@ module.exports = function (grunt) {
             }
         },
 
-
-
+        // Compiles CoffeeScript to JavaScript
+        coffee: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.app %>/scripts',
+                    src: '{,*/}*.{coffee,litcoffee,coffee.md}',
+                    dest: '.tmp/scripts',
+                    ext: '.js'
+                }]
+            },
+            test: {
+                files: [{
+                    expand: true,
+                    cwd: 'test/spec',
+                    src: '{,*/}*.{coffee,litcoffee,coffee.md}',
+                    dest: '.tmp/spec',
+                    ext: '.js'
+                }]
+            }
+        },
 
         // Compiles Sass to CSS and generates necessary files if requested
         compass: {
@@ -343,13 +378,22 @@ module.exports = function (grunt) {
         // Run some tasks in parallel to speed up build process
         concurrent: {
             server: [
+                'jade:compile',
+                'less:compile',
                 'compass:server',
+                'coffee:dist',
                 'copy:styles'
             ],
             test: [
+                'coffee',
+                'jade',
+                'less',
                 'copy:styles'
             ],
             dist: [
+                'coffee',
+                'jade:dist',
+                'less:dist',
                 'compass',
                 'copy:styles',
                 'imagemin',
@@ -434,8 +478,6 @@ module.exports = function (grunt) {
             'concurrent:server',
             'autoprefixer',
             'connect:livereload',
-            'less:compile',
-            'jade:compile',
             'watch'
         ]);
     });
@@ -463,8 +505,6 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'useminPrepare',
-        'jade:dist',
-        'less:dist',
         'concurrent:dist',
         'autoprefixer',
         'concat',
