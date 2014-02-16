@@ -14,6 +14,7 @@ module.exports = function (grunt) {
 
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
+    grunt.loadNpmTasks('assemble' );
 
     // Define the configuration for all the tasks
     grunt.initConfig({
@@ -55,6 +56,20 @@ module.exports = function (grunt) {
             coffeeTest: {
                 files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
                 tasks: ['coffee:test', 'test:watch']
+            },
+            assemble: {
+                files: [
+                    '<%= yeoman.app %>/*.hbs',
+                    '<%= yeoman.app %>/includes/*.hbs',
+                    '<%= yeoman.app %>/layouts/*.hbs',
+                    '<%= yeoman.app %>/helpers/*.js',
+                    '<%= yeoman.app %>/data/*',
+                    '<%= yeoman.app %>/assets'
+                    ],
+                tasks: ['newer:assemble'],
+                options: {
+                    livereload: true
+                }
             },
             jstest: {
                 files: ['test/spec/{,*/}*.js'],
@@ -182,6 +197,36 @@ module.exports = function (grunt) {
             }
         },
 
+        // Compiles Handlebars 
+        assemble: {
+            options: {
+                flatten: true,
+                //cwd: '<% yeoman.app %>',
+                assets: '<%= yeoman.app %>',
+                
+                // Metadata
+                data: ['<%= yeoman.app %>/data/*.{json,yml}'],
+
+                // Templates 
+                partials: ['<%= yeoman.app %>/includes/**/*.hbs'],
+                layoutdir: '<%= yeoman.app %>/layouts',
+                layout: 'default.hbs',
+
+                // Extensions
+                //helpers: ['<%= yeoman.app %>/helpers/**/*.js'],
+                plugins: ['permalinks']
+
+            },
+            compile: {
+                src: ['<%= yeoman.app %>/*.hbs'],
+                dest: '.tmp'
+            },
+            dist: {
+                src: ['<%= yeoman.app %>/*.hbs'],
+                dest: '<%= yeoman.dist %>'
+            }
+        },
+
         // Compiles Sass to CSS and generates necessary files if requested
         compass: {
             options: {
@@ -254,7 +299,8 @@ module.exports = function (grunt) {
             options: {
                 dest: '<%= yeoman.dist %>'
             },
-            html: '<%= yeoman.app %>/index.html'
+            //html: '<%= yeoman.app %>/index.html'
+            html: '<%= yeoman.app %>/layouts/default.hbs'
         },
 
         // Performs rewrites based on rev and the useminPrepare configuration
@@ -378,6 +424,7 @@ module.exports = function (grunt) {
         // Run some tasks in parallel to speed up build process
         concurrent: {
             server: [
+                'assemble:compile',
                 'jade:compile',
                 'less:compile',
                 'compass:server',
@@ -391,6 +438,7 @@ module.exports = function (grunt) {
                 'copy:styles'
             ],
             dist: [
+                'assemble:dist',
                 'coffee',
                 'jade:dist',
                 'less:dist',

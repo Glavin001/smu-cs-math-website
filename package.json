@@ -5,13 +5,13 @@
   "homepage": "https://github.com/SMU-CS-and-Math-Society/smu-cs-math-website",
   "contributors": [
     {
-        "name": "Dawson Reid",
-        "url": "https://github.com/dreid93"
+      "name": "Dawson Reid",
+      "url": "https://github.com/dreid93"
     },
     {
-        "name": "Glavin Wiechert",
-        "email": "glavin.wiechert@gmail.com",
-        "url": "https://github.com/Glavin001"
+      "name": "Glavin Wiechert",
+      "email": "glavin.wiechert@gmail.com",
+      "url": "https://github.com/Glavin001"
     }
   ],
   "repository": {
@@ -46,7 +46,8 @@
     "time-grunt": "~0.2.0",
     "jshint-stylish": "~0.1.3",
     "grunt-contrib-less": "~0.9.0",
-    "grunt-contrib-jade": "~0.10.0"
+    "grunt-contrib-jade": "~0.10.0",
+    "assemble": "~0.4.35"
   },
   "engines": {
     "node": ">=0.8.0"
