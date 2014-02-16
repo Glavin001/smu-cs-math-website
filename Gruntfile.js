@@ -348,6 +348,47 @@ module.exports = function (grunt) {
                 'imagemin',
                 'svgmin'
             ]
+        },
+        
+
+        // compile less 
+        less: {
+            develop: {
+                options: {
+                },
+                files: {
+                    'app/css/compiled.less.css': 'metalang/less/include.less'
+                }
+            },
+            release: {
+                options: {
+                    compress: true,
+                    cleancss: true
+                },
+                files: {
+                    'app/css/compiled.less.css': 'metalang/less/include.less'
+                }
+            }
+        },
+
+        // compile jade
+        jade: {
+            develop: {
+                options: {
+                    pretty: true
+                },
+                files: {
+                    "app/jade-tutorial.html": "metalang/jade/jade-tutorial.jade"
+                }
+            },
+
+            release: {
+                options: {
+                },
+                files: {
+                    "app/jade-tutorial.html": "metalang/jade/jade-tutorial.jade"
+                }
+            }
         }
     });
 
