@@ -34,6 +34,13 @@ module.exports = function (grunt) {
                     livereload: true
                 }
             },
+            jade: {
+                files: ['<%= yeoman.app %>/{,*/}*.jade'],
+                tasks: ['jade:compile'],
+                options: {
+                    livereload: true
+                }
+            },
             jstest: {
                 files: ['test/spec/{,*/}*.js'],
                 tasks: ['test:watch']
@@ -351,43 +358,67 @@ module.exports = function (grunt) {
         },
         
 
-        // compile less 
+        // Compile LESS 
         less: {
-            develop: {
+            compile: {
                 options: {
                 },
-                files: {
-                    'app/css/compiled.less.css': 'metalang/less/include.less'
-                }
+                files: [
+                    {
+                        cwd: "<%= yeoman.app %>",
+                        src: "**/*.less",
+                        dest: ".tmp",
+                        expand: true,
+                        ext: ".css"
+                    }
+                ]
             },
-            release: {
+            dist: {
                 options: {
                     compress: true,
                     cleancss: true
                 },
-                files: {
-                    'app/css/compiled.less.css': 'metalang/less/include.less'
-                }
+                files: [
+                    {
+                        cwd: "<%= yeoman.app %>",
+                        src: "**/*.less",
+                        dest: "<%= yeoman.dist %>",
+                        expand: true,
+                        ext: ".css"
+                    }
+                ]
             }
         },
 
-        // compile jade
+        // Compile Jade
         jade: {
-            develop: {
+            compile: {
                 options: {
                     pretty: true
                 },
-                files: {
-                    'app/jade-tutorial.html': 'metalang/jade/jade-tutorial.jade'
-                }
+                files: [
+                    {
+                        cwd: "<%= yeoman.app %>",
+                        src: "**/*.jade",
+                        dest: ".tmp",
+                        expand: true,
+                        ext: ".html"
+                    }
+                ]
             },
-
-            release: {
+            dist: {
                 options: {
+                    pretty: true
                 },
-                files: {
-                    'app/jade-tutorial.html': 'metalang/jade/jade-tutorial.jade'
-                }
+                files: [
+                    {
+                        cwd: "<%= yeoman.app %>",
+                        src: "**/*.jade",
+                        dest: "<%= yeoman.dist %>",
+                        expand: true,
+                        ext: ".html"
+                    }
+                ]
             }
         }
     });
@@ -403,6 +434,8 @@ module.exports = function (grunt) {
             'concurrent:server',
             'autoprefixer',
             'connect:livereload',
+            'less:compile',
+            'jade:compile',
             'watch'
         ]);
     });
@@ -430,6 +463,8 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'useminPrepare',
+        'jade:dist',
+        'less:dist',
         'concurrent:dist',
         'autoprefixer',
         'concat',
