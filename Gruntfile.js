@@ -378,7 +378,7 @@ module.exports = function (grunt) {
                     pretty: true
                 },
                 files: {
-                    "app/jade-tutorial.html": "metalang/jade/jade-tutorial.jade"
+                    'app/jade-tutorial.html': 'metalang/jade/jade-tutorial.jade'
                 }
             },
 
@@ -386,7 +386,7 @@ module.exports = function (grunt) {
                 options: {
                 },
                 files: {
-                    "app/jade-tutorial.html": "metalang/jade/jade-tutorial.jade"
+                    'app/jade-tutorial.html': 'metalang/jade/jade-tutorial.jade'
                 }
             }
         }
