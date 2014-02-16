@@ -6,6 +6,7 @@ node_js:
   - "0.6"
 before_install: 
 - gem install compass
+- gem install sass
 - npm install -g grunt-cli
 - npm install -g mocha
 install: npm install
